@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Little</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+    <style>
+        .full {
+            width: 100%;
+        }
+        
+        .forty {
+            float: left;
+            width: 40%;
+        }
+        
+        .sixty {
+            float: left;
+            width: 60%;
+        }
+    </style>
+    <script>
+        let addprice1 = 0;
+        let addprice2 = 0;
+        let addprice3 = 0;
+        let addprice4 = 0;
+        let minusprice1 = 0;
+        let minusprice2 = 0;
+        let minusprice3 = 0;
+        let minusprice4 = 0;
+
+        /*ADDING Items from Cart*/
+        function AddCart1() {
+            document.getElementById('prodlist').innerHTML += '<div id="removeit1"><li><ul name="prod_name">Product 1</ul></li> <p type="button" onclick="RemoveCart1()">Remove</p></div>';
+            addprice1 += 20;
+            AddCounter();
+        }
+
+        function AddCart2() {
+            document.getElementById('prodlist').innerHTML += '<div id="removeit2"><li><ul name="prod_name">Product 2</ul></li> <p type="button" onclick="RemoveCart2()">Remove</p></div>';
+            addprice2 += 30;
+            AddCounter();
+        }
+
+        function AddCart3() {
+            document.getElementById('prodlist').innerHTML += '<div id="removeit3"><li><ul name="prod_name">Product 3</ul></li> <p type="button" onclick="RemoveCart3()">Remove</p></div>';
+            addprice3 += 50;
+            AddCounter();
+        }
+
+        function AddCart4() {
+            document.getElementById('prodlist').innerHTML += '<div id="removeit4"><li><ul name="prod_name">Product 4</ul></li> <p type="button" onclick="RemoveCart4()">Remove</p></div>';
+            addprice4 += 10;
+            AddCounter();
+        }
+
+        /*REMOVING Items from Cart*/
+        function RemoveCart1() {
+            document.getElementById('removeit1').innerHTML = '';
+            minusprice1 -= 20;
+            AddCounter();
+        }
+
+        function RemoveCart2() {
+            document.getElementById('removeit2').innerHTML = '';
+            minusprice2 -= 30;
+            AddCounter();
+        }
+
+        function RemoveCart3() {
+            document.getElementById('removeit3').innerHTML = '';
+            minusprice3 -= 50;
+            AddCounter();
+        }
+
+        function RemoveCart4() {
+            document.getElementById('removeit4').innerHTML = '';
+            minusprice4 -= 10;
+            AddCounter();
+        }
+
+        /*TOTAL Price*/
+        function AddCounter() {
+            let newprice = addprice1 + addprice2 + addprice3 + addprice4 + minusprice1 + minusprice2 + minusprice3 + minusprice4;
+            document.getElementById('totalprice').innerHTML = newprice;
+        }
+
+        const cust_order = {
+            prod_name: prodlist,
+            prod_price: newprice
+        };
+        JSON.stringify(cust_order);
+    </script>
+</head>
+
+<body>
+    <h1>Items</h1>
+    <div>
+        <form action="http://sirjm.infinityfreeapp.com/checkout.php" method="GET">
+            <label>Product 1</label><br>
+            <p>Price: 20</p>
+            <button type="button" id="item1" onclick="AddCart1()">Add to Cart</button><br>
+            <label>Product 2</label><br>
+            <p>Price: 30</p>
+            <button type="button" id="item2" onclick="AddCart2()">Add to Cart</button><br>
+            <label>Product 3</label><br>
+            <p>Price: 50</p>
+            <button type="button" id="item3" onclick="AddCart3()">Add to Cart</button><br>
+            <label>Product 4</label><br>
+            <p>Price: 10</p>
+            <button type="button" id="item4" onclick="AddCart4()">Add to Cart</button>
+        </form>
+    </div>
+
+    <div>
+        <p>Total Price: <span id="totalprice">0</span></p>
+    </div>
+
+
+    <div class="row">
+        <div class="full">
+            <div class="forty">
+                <ul id="prodlist"></ul>
+            </div>
+
+            <div class="sixty">
+                <form action="http://sirjm.infinityfreeapp.com/checkout.php" method="GET">
+                    <label>Name</label><br>
+                    <input type="text" name="cust_name" placeholder="Firstname_Surname"><br><br>
+                    <label>Email</label><br>
+                    <input type="text" name="cust_email" placeholder="user@gmail.com"><br><br>
+                    <label>Delivery Address</label><br>
+                    <input type="text" name="cust_addr" placeholder="Country, Province, City, Street, Barangay"><br><br>
+                    <button type="submit" id="Order">Place Order</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
